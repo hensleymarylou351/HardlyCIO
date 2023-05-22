@@ -8,7 +8,6 @@ from langchain.document_loaders import TextLoader
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from utils import compute_sha1_from_content
-from langchain.schema import Document
 from stats import add_usage
 
 
@@ -36,8 +35,7 @@ def _transcribe_audio(api_key, audio_file, stats_db):
     return transcript
 
 def process_audio(vector_store, file_name, stats_db):
-    if st.secrets.self_hosted == "false":
-        if file_name.size > 10000000:
+
             st.error("File size is too large. Please upload a file smaller than 1MB.")
             return
     file_sha = ""
